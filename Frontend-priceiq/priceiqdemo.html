@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PriceIQ - Interactive Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF385C 0%, #FF1744 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-link.active {
+            color: #FF385C;
+        }
+        
+        .nav-link:hover {
+            color: #1a1a1a;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Dashboard Header */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .property-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        /* Strategy Comparison */
+        .comparison-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .strategy-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .strategy-tab {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: #f3f4f6;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .strategy-tab.active {
+            background: #FF385C;
+            color: white;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .strategy-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        .strategy-card:hover {
+            border-color: #FF385C;
+            box-shadow: 0 8px 16px rgba(255, 56, 92, 0.1);
+        }
+        
+        .strategy-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .strategy-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .metric {
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .positive {
+            color: #10b981;
+        }
+        
+        .negative {
+            color: #ef4444;
+        }
+        
+        /* Price Explanation */
+        .explanation-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .explanation-content {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .explanation-text {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: #374151;
+        }
+        
+        .factor-list {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .factor-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s;
+        }
+        
+        .factor-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+        }
+        
+        .factor-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .factor-icon {
+            width: 40px;
+            height: 40px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .factor-name {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .factor-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .factor-impact {
+            text-align: right;
+        }
+        
+        .impact-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        /* Event Calendar */
+        .event-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #f9fafb;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .calendar-day:hover {
+            background: #f3f4f6;
+        }
+        
+        .calendar-day.has-event {
+            background: #fee2e2;
+            border: 2px solid #fca5a5;
+        }
+        
+        .event-indicator {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+        
+        /* Charts */
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(180deg, rgba(255, 56, 92, 0.1) 0%, rgba(255, 56, 92, 0.3) 100%);
+            clip-path: polygon(0 100%, 10% 80%, 20% 85%, 30% 70%, 40% 60%, 50% 65%, 60% 50%, 70% 45%, 80% 55%, 90% 40%, 100% 35%, 100% 100%);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: #FF385C;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e61e4d;
+            box-shadow: 0 4px 12px rgba(255, 56, 92, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .strategy-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Loading States */
+        .skeleton {
+            background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            PriceIQ
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active">Dashboard</a>
+            <a href="#" class="nav-link">Simulator</a>
+            <a href="#" class="nav-link">Events</a>
+            <a href="#" class="nav-link">Analytics</a>
+            <a href="#" class="nav-link">Team</a>
+            <button class="btn btn-primary">Add Property</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="property-selector">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg>
+                <select style="border: none; background: none; font-size: 1rem; font-weight: 500;">
+                    <option>Beachfront Villa - Miami</option>
+                    <option>Downtown Loft - Seattle</option>
+                    <option>Mountain Cabin - Tahoe</option>
+                </select>
+            </div>
+            <div class="date-range">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Mar 15 - Apr 15, 2024</span>
+            </div>
+        </div>
+
+        <!-- Strategy Comparison -->
+        <div class="comparison-container fade-in">
+            <div class="comparison-header">
+                <h2 style="font-size: 1.5rem; font-weight: 700;">Strategy Comparison</h2>
+                <div class="strategy-tabs">
+                    <div class="strategy-tab active">Compare</div>
+                    <div class="strategy-tab">Simulate</div>
+                    <div class="strategy-tab">Optimize</div>
+                </div>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="strategy-card">
+                    <div class="strategy-name">Current Strategy</div>
+                    <div style="color: #6b7280; margin-bottom: 1rem;">Your active pricing strategy</div>
+                    
+                    <div class="strategy-metrics">
+                        <div class="metric">
+                            <div class="metric-label">Avg. Nightly Rate</div>
+                            <div class="metric-value">$175</div>
+                            <div class="metric-change positive">↑ 12% vs last month</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Occupancy</div>
+                            <div class="metric-value">68%</div>
+                            <div class="metric-change negative">↓ 5% vs last month</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Revenue</div>
+                            <div class="metric-value">$3,570</div>
+                            <div class="metric-change positive">↑ 8% vs last month</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">RevPAN</div>
+                            <div class="metric-value">$119</div>
+                            <div class="metric-change positive">↑ 6% vs last month</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="strategy-card">
+                    <div class="strategy-name">AI Recommended</div>
+                    <div style="color: #6b7280; margin-bottom: 1rem;">Optimized for maximum revenue</div>
+                    
+                    <div class="strategy-metrics">
+                        <div class="metric">
+                            <div class="metric-label">Avg. Nightly Rate</div>
+                            <div class="metric-value">$195</div>
+                            <div class="metric-change positive">↑ 11% vs current</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Occupancy</div>
+                            <div class="metric-value">75%</div>
+                            <div class="metric-change positive">↑ 10% vs current</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Revenue</div>
+                            <div class="metric-value">$4,387</div>
+                            <div class="metric-change positive">↑ 23% vs current</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">RevPAN</div>
+                            <div class="metric-value">$146</div>
+                            <div class="metric-change positive">↑ 23% vs current</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Price Explanation Panel -->
+        <div class="explanation-panel fade-in">
+            <div class="explanation-header">
+                <h3 style="font-size: 1.25rem; font-weight: 600;">Why This Price?</h3>
+                <div class="ai-badge">AI Powered</div>
+            </div>
+            
+            <div class="explanation-content">
+                <p class="explanation-text">
+                    I recommend <strong>$225/night</strong> for March 22nd because the Miami Music Festival (50,000 attendees) is happening just 2 miles from your property. Combined with it being a Friday night during spring break season, demand is exceptionally high. Your competitors have already raised prices by 35% on average.
+                </p>
+            </div>
+            
+            <div class="factor-list">
+                <div class="factor-item">
+                    <div class="factor-info">
+                        <div class="factor-icon">🎵</div>
+                        <div>
+                            <div class="factor-name">Miami Music Festival</div>
+                            <div class="factor-description">50,000 attendees, 2 miles away</div>
+                        </div>
+                    </div>
+                    <div class="factor-impact">
+                        <div class="impact-value positive">+$65</div>
+                        <div class="metric-change positive">+40% impact</div>
+                    </div>
+                </div>
+                
+                <div class="factor-item">
+                    <div class="factor-info">
+                        <div class="factor-icon">📅</div>
+                        <div>
+                            <div class="factor-name">Friday Night</div>
+                            <div class="factor-description">Weekend premium pricing</div>
+                        </div>
+                    </div>
+                    <div class="factor-impact">
+                        <div class="impact-value positive">+$25</div>
+                        <div class="metric-change positive">+15% impact</div>
+                    </div>
+                </div>
+                
+                <div class="factor-item">
+                    <div class="factor-info">
+                        <div class="factor-icon">☀️</div>
+                        <div>
+                            <div class="factor-name">Spring Break Season</div>
+                            <div class="factor-description">Peak season for Miami</div>
+                        </div>
+                    </div>
+                    <div class="factor-impact">
+                        <div class="impact-value positive">+$30</div>
+                        <div class="metric-change positive">+18% impact</div>
+                    </div>
+                </div>
+                
+                <div class="factor-item">
+                    <div class="factor-info">
+                        <div class="factor-icon">🏠</div>
+                        <div>
+                            <div class="factor-name">Competitor Pricing</div>
+                            <div class="factor-description">3 similar properties raised prices</div>
+                        </div>
+                    </div>
+                    <div class="factor-impact">
+                        <div class="impact-value positive">+$20</div>
+                        <div class="metric-change positive">+12% impact</div>
+                    </div>
+                </div>
+                
+                <div class="factor-item">
+                    <div class="factor-info">
+                        <div class="factor-icon">⏰</div>
+                        <div>
+                            <div class="factor-name">Last Minute Booking</div>
+                            <div class="factor-description">Less than 7 days out</div>
+                        </div>
+                    </div>
+                    <div class="factor-impact">
+                        <div class="impact-value negative">-$15</div>
+                        <div class="metric-change negative">-9% impact</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Calendar -->
+        <div class="event-panel fade-in">
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Upcoming Events</h3>
+            <div class="calendar-grid">
+                <!-- Calendar days -->
+                <div class="calendar-day">15</div>
+                <div class="calendar-day">16</div>
+                <div class="calendar-day">17</div>
+                <div class="calendar-day">18</div>
+                <div class="calendar-day">19</div>
+                <div class="calendar-day">20</div>
+                <div class="calendar-day">21</div>
+                <div class="calendar-day has-event">
+                    22
+                    <div class="event-indicator"></div>
+                </div>
+                <div class="calendar-day has-event">
+                    23
+                    <div class="event-indicator"></div>
+                </div>
+                <div class="calendar-day has-event">
+                    24
+                    <div class="event-indicator"></div>
+                </div>
+                <div class="calendar-day">25</div>
+                <div class="calendar-day">26</div>
+                <div class="calendar-day">27</div>
+                <div class="calendar-day">28</div>
+            </div>
+        </div>
+
+        <!-- Revenue Projection Chart -->
+        <div class="chart-container fade-in">
+            <div class="chart-header">
+                <h3 style="font-size: 1.25rem; font-weight: 600;">Revenue Projection</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-secondary">Export</button>
+                    <button class="btn btn-primary">Apply Strategy</button>
+                </div>
+            </div>
+            <div class="chart-placeholder">
+                <div class="chart-line"></div>
+                <span style="color: #9ca3af; z-index: 1;">Interactive revenue chart will render here</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive behavior
+        document.querySelectorAll('.strategy-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.strategy-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Animate numbers on load
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = '$' + Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Animate metric values
+        setTimeout(() => {
+            document.querySelectorAll('.metric-value').forEach(el => {
+                if (el.innerHTML.includes('$')) {
+                    const value = parseInt(el.innerHTML.replace(/[^0-9]/g, ''));
+                    animateValue(el, 0, value, 1000);
+                }
+            });
+        }, 500);
+    </script>
+</body>
+</html>
